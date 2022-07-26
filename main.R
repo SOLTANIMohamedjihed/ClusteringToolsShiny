@@ -22,10 +22,10 @@ ui<-shinyUI(fluidPage(theme = shinytheme("spacelab"),
                                   "EM - can be slow to converge"=17,
                                   "Kmeans Euclidean Distance" =1,
                                   "Kmeans Means Distance"=3,
-                                  #"Kmeans Minkowski"=4,
+                                  "Kmeans Minkowski"=4,
                                   "Fuzzy kmeans"=9,"Fuzzy kmeans - Gustafson and Kessel"=10,"Fuzzy k-medoids"=13,"Fuzzy k-means with polynomial fuzzifier"=11,
                                   "Local Outlier Factor"=5,
-                                 # "SVM"=16,
+                                  "SVM"=16,
                                   "RandomForest"=6,"Isolation Forest"=7,
                                   "FBOD"=14,"SOD"=15,
                                   "Autoencoder"=8
@@ -147,7 +147,7 @@ server<-shinyServer(function(input, output, session) {
     if (input$Model==3) {
       results <- kmeans(selectedData$df, input$clusters)
       centers <<- results$centers[results$cluster, ]
-      #center2 <- as.data.frame(centers)
+      center2 <- as.data.frame(centers)
       d <- sqrt(rowSums((selectedData$df[,1:2] - centers)^2))
       m <- tapply(d, results$cluster,mean)
       # divide each distance by the mean for its cluster:
